@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  dabarblog.app:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_HTTPS_PORT=6001
+      - ConnectionStrings:DefaultConnection=Server=dabablog.sqldb;Database=aspnetapp;User Id=sa;Password=Pass@word
+
+    ports:
+      - "6000:80"
+      - "6001:443"
+    volumes:
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+
+  dabarblog.sqldb:
+    ports:
+     - "5468:1433"
+    environment:
+     - SA_PASSWORD=Pass@word
+     - ACCEPT_EULA=Y

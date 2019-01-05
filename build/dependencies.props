@@ -1,0 +1,67 @@
+<Project>
+  <PropertyGroup Label="SDK Versions">
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <NetStandardTargetVersion>netstandard2.0</NetStandardTargetVersion>
+    <NetCoreCommonVersion></NetCoreCommonVersion>
+    <MicrosoftNETCoreApp></MicrosoftNETCoreApp>
+    <MicrosoftAspNetCoreRazorDesign></MicrosoftAspNetCoreRazorDesign>
+  </PropertyGroup>
+
+    <Choose>
+    <When Condition=" '$(NetCoreToTarget)' == 'net30' ">
+      <PropertyGroup Label="Netcore Versions">
+          <NetCoreTargetVersion>netcoreapp3.0</NetCoreTargetVersion>
+          <NetCoreCommonVersion>3.0.0-preview.18572.1</NetCoreCommonVersion>
+          <MicrosoftNETCoreApp>3.0.0-preview-18579-0056</MicrosoftNETCoreApp>
+          <MicrosoftAspNetCoreRazorDesign>3.0.0-alpha1-10670</MicrosoftAspNetCoreRazorDesign>
+          <MicrosoftAspNetCoreIdentityEntityFrameworkCore>$(MicrosoftNETCoreApp)</MicrosoftAspNetCoreIdentityEntityFrameworkCore>
+          <MicrosoftAspNetCoreDiagnosticsEntityFrameworkCore>$(MicrosoftNETCoreApp)</MicrosoftAspNetCoreDiagnosticsEntityFrameworkCore>
+          <MicrosoftAspNetCoreIdentityUI>3.0.0-preview-18571-0006</MicrosoftAspNetCoreIdentityUI>
+     </PropertyGroup>
+    </When>
+    <When Condition=" '$(NetCoreToTarget)' == 'net22' ">
+      <PropertyGroup Label="Netcore Versions">
+          <NetCoreTargetVersion>netcoreapp2.2</NetCoreTargetVersion>
+          <NetCoreCommonVersion>2.2.0</NetCoreCommonVersion>
+          <MicrosoftAspNetCoreMvcApiAnalyzers>$(NetCoreCommonVersion)</MicrosoftAspNetCoreMvcApiAnalyzers>
+          <MicrosoftAspNetCoreRazorDesign>$(NetCoreCommonVersion)</MicrosoftAspNetCoreRazorDesign>
+          <MicrosoftAspNetCoreIdentityUI>$(NetCoreCommonVersion)</MicrosoftAspNetCoreIdentityUI>
+          <MicrosoftAspNetCoreIdentityEntityFrameworkCore>$(NetCoreCommonVersion)</MicrosoftAspNetCoreIdentityEntityFrameworkCore>
+          <MicrosoftAspNetCoreDiagnosticsEntityFrameworkCore>$(NetCoreCommonVersion)</MicrosoftAspNetCoreDiagnosticsEntityFrameworkCore>
+      </PropertyGroup>
+    </When>
+  </Choose>
+
+  <PropertyGroup Label="NetCore Specific Package Versions">
+    <MicrosoftAspNetCoreIdentity>$(NetCoreCommonVersion)</MicrosoftAspNetCoreIdentity>
+    <MicrosoftEntityFrameworkCoreSqlServer>$(NetCoreCommonVersion)</MicrosoftEntityFrameworkCoreSqlServer>
+    <MicrosoftEntityFrameworkCoreTools>$(NetCoreCommonVersion)</MicrosoftEntityFrameworkCoreTools>
+
+    <MicrosoftAspNetCoreHttpFeatures>$(NetCoreCommonVersion)</MicrosoftAspNetCoreHttpFeatures>
+    <MicrosoftEntityFrameworkCore>$(NetCoreCommonVersion)</MicrosoftEntityFrameworkCore>
+    <MicrosoftEntityFrameworkCoreSqlServer>$(NetCoreCommonVersion)</MicrosoftEntityFrameworkCoreSqlServer>
+    <MicrosoftVisualStudioWebCodeGenerationDesign>$(NetCoreCommonVersion)</MicrosoftVisualStudioWebCodeGenerationDesign>
+    <MicrosoftExtensionsConfigurationAbstractions>$(NetCoreCommonVersion)</MicrosoftExtensionsConfigurationAbstractions>
+    <MicrosoftExtensionsLoggingAbstractions>$(NetCoreCommonVersion)</MicrosoftExtensionsLoggingAbstractions>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Testing Package Versions">
+    <Moq>4.10.1</Moq>
+    <xunit>2.4.1</xunit>
+    <xunitrunnervisualstudio>2.4.1</xunitrunnervisualstudio>
+    <MicrosoftNETTestSdk>15.9.0</MicrosoftNETTestSdk>
+    <MicrosoftVisualStudioTestPlatform>14.0.0.1</MicrosoftVisualStudioTestPlatform>
+    <MSTestTestAdapter>1.3.2</MSTestTestAdapter>
+    <MSTestTestFramework>1.3.2</MSTestTestFramework>
+    <MicrosoftAspNetCoreTestHost>$(AspNetCoreCommonVersion)</MicrosoftAspNetCoreTestHost>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Package Versions">
+
+    <FluentValidationAspNetCore>8.0.100</FluentValidationAspNetCore>
+    <SwashbuckleAspNetCore>4.0.1</SwashbuckleAspNetCore>
+    <SerilogSinksRollingFile>3.3.0</SerilogSinksRollingFile>
+    <AutoMapperExtensionsMicrosoftDependencyInjection>6.0.0</AutoMapperExtensionsMicrosoftDependencyInjection>
+    <MicrosoftVisualStudioAzureContainersToolsTargets>1.1.1</MicrosoftVisualStudioAzureContainersToolsTargets>
+  </PropertyGroup>
+</Project>
