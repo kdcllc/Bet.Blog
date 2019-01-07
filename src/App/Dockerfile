@@ -1,20 +1,17 @@
-FROM microsoft/dotnet:2.2-aspnetcore-runtime AS base
+ARG sdkImage=kdcllc/dotnet
+ARG sdkTag=2.2-sdk
+ARG runtimeImage=microsoft/dotnet
+ARG runtimeTag=2.2-aspnetcore-runtime
+ARG coreversion=netcore22
+
+# Build image
+FROM ${sdkImage}:${sdkTag} as builder
+RUN npm -v
+
+RUN dotnet publish "./src/App/App.csproj" -c Release -p:NetCoreVersion=${coreversion} -o /app
+
+# App image
+FROM ${runtimeImage}:${runtimeTag} AS final
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
-
-FROM microsoft/dotnet:2.2-sdk AS build
-WORKDIR /src
-COPY ["DabarBlog/DabarBlog.csproj", "DabarBlog/"]
-RUN dotnet restore "DabarBlog/DabarBlog.csproj"
-COPY . .
-WORKDIR "/src/DabarBlog"
-RUN dotnet build "DabarBlog.csproj" -c Release -o /app
-
-FROM build AS publish
-RUN dotnet publish "DabarBlog.csproj" -c Release -o /app
-
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "DabarBlog.dll"]
+COPY --from=builder /app .
+ENTRYPOINT ["dotnet", "App.dll"]

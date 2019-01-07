@@ -1,7 +1,7 @@
 version: '3.4'
 
 services:
-  dabarblog.app:
+  app:
     image: ${DOCKER_REGISTRY-}dabarblog
     build:
       context: .
@@ -18,5 +18,5 @@ services:
         # runtimeTag: 3.0-aspnetcore-runtime
         # coreversion: netcore30
 
-  dabarblog.sqldb:
+  app.sqldb:
    image: microsoft/mssql-server-linux

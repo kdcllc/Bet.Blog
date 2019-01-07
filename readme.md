@@ -8,3 +8,8 @@ The goal of this project is to develop a blogging platform for Biblical oriented
 ## Technology stack
 
 ##
+
+Build Docker
+```cmd
+    docker-compose -f "docker-compose.yml" -f "docker-compose.override.yml"  up -d --build
+```
