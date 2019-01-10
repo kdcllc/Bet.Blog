@@ -11,7 +11,10 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  solutionName: 'DabarBlog.sln'
 
 steps:
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+- script: | 
+  dotnet build $(solutionName) --configuration $(buildConfiguration)
+  dotnet test dotnetcore-tests --configuration $(buildConfiguration) --logger trx
+  dotnet publish src/App/App.csproj --configuration $(buildConfiguration) --output $BUILD_ARTIFACTSTAGINGDIRECTORY
