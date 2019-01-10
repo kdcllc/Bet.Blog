@@ -17,3 +17,10 @@ steps:
 - script: | 
    dotnet build $(solutionName) --configuration $(buildConfiguration) 
    dotnet publish src/App/App.csproj --configuration $(buildConfiguration) --output $BUILD_ARTIFACTSTAGINGDIRECTORY
+
+
+- task: PublishTestResults@2
+  condition: succeededOrFailed()
+  inputs:
+    testRunner: VSTest
+    testResultsFiles: '**/*.trx'
