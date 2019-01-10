@@ -16,5 +16,5 @@ variables:
 steps:
 - script: | 
   dotnet build $(solutionName) --configuration $(buildConfiguration)
-  dotnet test dotnetcore-tests --configuration $(buildConfiguration) --logger trx
+  dotnet test test/App.unittests/App.unittests.csproj --configuration $(buildConfiguration) --logger trx
   dotnet publish src/App/App.csproj --configuration $(buildConfiguration) --output $BUILD_ARTIFACTSTAGINGDIRECTORY
