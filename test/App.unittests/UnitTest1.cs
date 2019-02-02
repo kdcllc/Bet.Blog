@@ -8,7 +8,6 @@ namespace App.unittests
         [Fact]
         public void Test1()
         {
-
         }
     }
 }

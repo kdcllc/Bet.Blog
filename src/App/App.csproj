@@ -6,6 +6,8 @@
     <AspNetCoreHostingModel>$(AspNetCoreHostingModel)</AspNetCoreHostingModel>
     <DockerDefaultTargetOS>$(DockerDefaultTargetOS)</DockerDefaultTargetOS>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+    <RootNamespace>DabarBlog.App</RootNamespace>
+    <AssemblyName>DabarBlog.App</AssemblyName>
   </PropertyGroup>
 
 
