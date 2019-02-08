@@ -5,6 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Hosting\frjqpbfr.kzh~" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="$(NetCoreCommonVersion)" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" Version="$(NetCoreCommonVersion)" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="$(NetCoreCommonVersion)" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="$(NetCoreCommonVersion)" />
+    <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="$(NetCoreCommonVersion)" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="$(NetCoreCommonVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj" />
   </ItemGroup>
 

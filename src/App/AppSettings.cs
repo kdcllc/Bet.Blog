@@ -9,6 +9,7 @@ namespace DabarBlog
     public class AppSettings
     {
         public string Name { get; set; }
+
         public int Port { get; set; }
     }
 }

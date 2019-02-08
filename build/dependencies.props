@@ -46,8 +46,8 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Testing Package Versions">
-    <Moq>4.10.1</Moq>
-    <xunit>2.4.1</xunit>
+    <MoqVersion>4.10.1</MoqVersion>
+    <xunitVersion>2.4.1</xunitVersion>
     <xunitrunnervisualstudio>2.4.1</xunitrunnervisualstudio>
     <MicrosoftNETTestSdk>15.9.0</MicrosoftNETTestSdk>
     <MicrosoftVisualStudioTestPlatform>14.0.0.1</MicrosoftVisualStudioTestPlatform>
@@ -62,6 +62,8 @@
     <SwashbuckleAspNetCore>4.0.1</SwashbuckleAspNetCore>
     <SerilogSinksRollingFile>3.3.0</SerilogSinksRollingFile>
     <AutoMapperExtensionsMicrosoftDependencyInjection>6.0.0</AutoMapperExtensionsMicrosoftDependencyInjection>
-    <MicrosoftVisualStudioAzureContainersToolsTargets>1.1.1</MicrosoftVisualStudioAzureContainersToolsTargets>
+    <MicrosoftVisualStudioAzureContainersToolsTargets>1.4.4</MicrosoftVisualStudioAzureContainersToolsTargets>
+    <MicrosoftCodeAnalysisFxCopAnalyzers>2.6.3</MicrosoftCodeAnalysisFxCopAnalyzers>
+    <StyleCopAnalyzers>1.0.2</StyleCopAnalyzers>
   </PropertyGroup>
 </Project>

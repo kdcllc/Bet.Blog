@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.168
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28531.58
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{49AD850C-1819-4AB8-9F09-692CC47B9BA7}"
 EndProject
@@ -11,7 +11,6 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{EC270762-DA15-4452-A4FB-F6A219053B73}"
 	ProjectSection(SolutionItems) = preProject
-		build\Dabablog.ruleset = build\Dabablog.ruleset
 		build\dependencies.props = build\dependencies.props
 		build\sources.props = build\sources.props
 	EndProjectSection
@@ -32,7 +31,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{A92F649D-40E3-42F0-9314-A9966A1A8453}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.unittests", "test\App.unittests\App.unittests.csproj", "{F6ABFE90-4CF8-4123-A38A-605FF018E10A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.unittests", "test\App.unittests\App.unittests.csproj", "{F6ABFE90-4CF8-4123-A38A-605FF018E10A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
