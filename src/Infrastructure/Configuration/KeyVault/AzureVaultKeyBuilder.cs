@@ -18,11 +18,12 @@ namespace Microsoft.Extensions.Configuration
     /// https://rahulpnath.com/blog/authenticating-with-azure-key-vault-using-managed-service-identity/
     /// AzureServicesAuthConnectionString=RunAs=App;AppId=AppId;TenantId=TenantId;AppKey=Secret
     /// </summary>
-    public static class AzureVaultBuilder
+    public static class AzureVaultKeyBuilder
     {
         private static Dictionary<string, string> _enviroments = new Dictionary<string, string>
         {
             {"Development", "dev" },
+            {"Staging", "qa" },
             {"Production", "prod" }
         };
 
@@ -34,10 +35,7 @@ namespace Microsoft.Extensions.Configuration
             var config = builder.Build();
             var options = config.Bind<AzureVaultOptions>("AzureVault");
 
-            var failed = false;
-
             var prefix = string.Empty;
-
             if (usePrefix)
             {
                 _enviroments.TryGetValue(hostingEnviroment.EnvironmentName, out prefix);
@@ -49,7 +47,7 @@ namespace Microsoft.Extensions.Configuration
                 {
                     var policy = Policy
                         .Handle<AzureServiceTokenProviderException>()
-                        .WaitAndRetry(2, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
+                        .WaitAndRetry(2, retryAttempt => TimeSpan.FromSeconds(Math.Pow(3, retryAttempt)));
 
                     var azureServiceTokenProvider = new AzureServiceTokenProvider();
 
@@ -76,40 +74,22 @@ namespace Microsoft.Extensions.Configuration
                     {
                         builder.Sources.Remove(found);
                     }
-                    failed = true;
                 }
             }
 
             if (!string.IsNullOrWhiteSpace(options.ClientId)
-                && !string.IsNullOrWhiteSpace(options.ClientSecret)
-                && failed)
+                && !string.IsNullOrWhiteSpace(options.ClientSecret))
             {
                 var secretBytes = Convert.FromBase64String(options.ClientSecret);
                 var secret = System.Text.Encoding.ASCII.GetString(secretBytes);
 
-                var kv = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(GetToken));
-
-                async Task<string> GetToken(string authority, string resource, string scope)
-                {
-                    var authContext = new AuthenticationContext(authority);
-                    var clientCred = new ClientCredential(options.ClientId, secret);
-                    var result = await authContext.AcquireTokenAsync(resource, clientCred);
-
-                    if (result == null)
-                    {
-                        throw new InvalidOperationException("Failed to obtain the Azure JWT token");
-                    }
-
-                    return result.AccessToken;
-                }
-
                 if (!string.IsNullOrEmpty(prefix))
                 {
-                    builder.AddAzureKeyVault(options.BaseUrl, kv, new PrefixKeyVaultSecretManager(prefix));
+                    builder.AddAzureKeyVault(options.BaseUrl, options.ClientId, secret, new PrefixKeyVaultSecretManager(prefix));
                 }
                 else
                 {
-                    builder.AddAzureKeyVault(options.BaseUrl, kv, new DefaultKeyVaultSecretManager());
+                    builder.AddAzureKeyVault(options.BaseUrl, options.ClientId, secret, new DefaultKeyVaultSecretManager());
                 }
             }
 

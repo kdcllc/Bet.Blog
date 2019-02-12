@@ -14,7 +14,7 @@
     <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="$(NetCoreCommonVersion)" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="$(NetCoreCommonVersion)" />
 
-    <PackageReference Include="Polly" Version="$(PolyVersion)" />
+    <PackageReference Include="Polly" Version="$(PollyVersion)" />
 
     <PackageReference Include="Serilog.Extensions.Logging" Version="$(SerilogExtensionsLogging)" />
     <PackageReference Include="Serilog.Sinks.Console" Version="$(SerilogSinksConsole)" />
