@@ -59,12 +59,16 @@
   <PropertyGroup Label="Package Versions">
 
     <FluentValidationAspNetCore>8.0.100</FluentValidationAspNetCore>
+    <PollyVersion>7.0.2</PollyVersion>
     <SwashbuckleAspNetCore>4.0.1</SwashbuckleAspNetCore>
     <SerilogSinksRollingFile>3.3.0</SerilogSinksRollingFile>
     <AutoMapperExtensionsMicrosoftDependencyInjection>6.0.0</AutoMapperExtensionsMicrosoftDependencyInjection>
     <MicrosoftVisualStudioAzureContainersToolsTargets>1.4.4</MicrosoftVisualStudioAzureContainersToolsTargets>
     <MicrosoftCodeAnalysisFxCopAnalyzers>2.6.3</MicrosoftCodeAnalysisFxCopAnalyzers>
     <StyleCopAnalyzers>1.0.2</StyleCopAnalyzers>
+
+    <MicrosoftAzureKeyVault>3.0.3</MicrosoftAzureKeyVault>
+    <MicrosoftExtensionsConfigurationAzureKeyVault>2.2.0</MicrosoftExtensionsConfigurationAzureKeyVault>
   </PropertyGroup>
 
   <PropertyGroup Label="Serilog Versions">

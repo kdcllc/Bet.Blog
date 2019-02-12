@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Serilog;
+using Microsoft.Azure.Services.AppAuthentication;
 
 namespace DabarBlog
 {
@@ -16,8 +17,11 @@ namespace DabarBlog
             WebHost.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((hostingContext, configBuilder) =>
                 {
-                    var configuration = configBuilder.Build();
-                    configuration.DebugConfigurationsWithSerilog();
+                    var config = configBuilder.Build();
+
+                    config = configBuilder.AddAzureKeyVault(hostingContext.HostingEnvironment);
+
+                    config.DebugConfigurationsWithSerilog();
                 })
                 .UseStartup<Startup>()
                 .UseSerilog((hostingContext, loggerConfiguration) =>
