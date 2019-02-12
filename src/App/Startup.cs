@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.ResponseCompression;
 using System.IO.Compression;
+using Serilog;
 
 namespace DabarBlog
 {
@@ -31,6 +32,8 @@ namespace DabarBlog
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddLogging(p => p.AddSerilog(dispose: false));
+
             services.AddHealthChecks();
 
             // Enable GZip and Brotli compression.

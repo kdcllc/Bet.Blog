@@ -26,6 +26,39 @@ namespace Microsoft.Extensions.Configuration
         }
 
         /// <summary>
+        ///  Attempts to bind the given object type instance to the configuration section
+        /// </summary>
+        /// <typeparam name="TOptions">The type of the configuration section to bind to.</typeparam>
+        /// <param name="configuration">The configuration.</param>
+        /// <param name="key">The section key. If <c>null</c>, the name of the type <typeparamref name="TOptions"/> is used.</param>
+        /// <returns>The bound object.</returns>
+        public static TOptions Bind<TOptions>(
+            this IConfiguration configuration,
+            string key = null,
+            bool enableValidation = true)
+            where TOptions : class, new()
+        {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+
+            if (key == null)
+            {
+                key = typeof(TOptions).Name;
+            }
+
+            var section = (object)new TOptions();
+            configuration.GetSection(key).Bind(section);
+
+            if (enableValidation)
+            {
+                ValidateDataAnnotation<TOptions>(section, key);
+            }
+            return (TOptions)section;
+        }
+
+        /// <summary>
         /// Attempts to bind the given object instance to the configuration section
         /// specified by the key by matching property names against configuration keys recursively.
         /// This method binds the instance of the object and

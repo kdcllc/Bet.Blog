@@ -12,13 +12,26 @@
     <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="$(NetCoreCommonVersion)" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" Version="$(NetCoreCommonVersion)" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="$(NetCoreCommonVersion)" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="$(NetCoreCommonVersion)" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="$(NetCoreCommonVersion)" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="$(NetCoreCommonVersion)" />
     <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="$(NetCoreCommonVersion)" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="$(NetCoreCommonVersion)" />
+    
+    <PackageReference Include="Serilog.Extensions.Logging" Version="$(SerilogExtensionsLogging)" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="$(SerilogSinksConsole)" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="$(SerilogSettingsConfiguration)" />
+    <PackageReference Include="Serilog.Sinks.AzureAnalytics" Version="$(SerilogSinksAzureAnalytics)" />
+    <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="$(SerilogSinksApplicationInsights)" />
+    <PackageReference Include="Serilog.Sinks.RollingFile" Version="$(SerilogSinksRollingFile)" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Options\" />
   </ItemGroup>
 
 </Project>

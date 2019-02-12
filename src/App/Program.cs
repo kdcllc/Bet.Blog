@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace DabarBlog
 {
@@ -19,6 +14,21 @@ namespace DabarBlog
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+                .ConfigureAppConfiguration((hostingContext, configBuilder) =>
+                {
+                    var configuration = configBuilder.Build();
+                    configuration.DebugConfigurationsWithSerilog();
+                })
+                .UseStartup<Startup>()
+                .UseSerilog((hostingContext, loggerConfiguration) =>
+                {
+                    loggerConfiguration
+                          .ReadFrom.Configuration(hostingContext.Configuration)
+                          .Enrich.FromLogContext()
+                          .WriteTo.Console()
+                          .AddApplicationInsights(hostingContext.Configuration)
+                          .AddAzureLogAnalytics(hostingContext.Configuration);
+                })
+                .ConfigureKestrel(a => a.AddServerHeader = false);
     }
 }
