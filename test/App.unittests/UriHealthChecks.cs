@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -13,9 +16,11 @@ namespace App.unittests
     {
 
         [Fact]
-        public void Check()
+        public async Task Check()
         {
-            var host = new WebHostBuilder()
+            var statusCode = 200;
+
+            var hostBuilder = new WebHostBuilder()
                 .ConfigureServices(services =>
                 {
                     services.AddHealthChecks()
@@ -23,10 +28,23 @@ namespace App.unittests
                     {
                         builder.Add(options =>
                         {
-                            options.AddUri("http://localhost/api/HttpStat/200").UseExpectedHttpCode(200);
+                            options.AddUri($"http://localhost/api/HttpStat/${statusCode}").UseExpectedHttpCode(statusCode);
                         });
                     });
+                })
+                .Configure(app=>
+                {
+                    app.UseHealthChecks("/healthy", new HealthCheckOptions
+                    {
+                        ResponseWriter = HealthCheckBuilderExtensions.WriteResponse
+                    });
                 });
+
+            var client = new TestServer(hostBuilder).CreateClient();
+
+            var result = await client.GetAsync("/healthy");
+
+            Assert.Equal(statusCode, (int)result.StatusCode);
         }
     }
 }
