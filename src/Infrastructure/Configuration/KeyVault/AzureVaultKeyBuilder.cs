@@ -95,6 +95,5 @@ namespace Microsoft.Extensions.Configuration
 
             return builder.Build();
         }
-
     }
 }

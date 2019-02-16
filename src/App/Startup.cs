@@ -17,6 +17,8 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.ResponseCompression;
 using System.IO.Compression;
 using Serilog;
+using Infrastructure.HealthChecks.UriCheck;
+using System.Net;
 
 namespace DabarBlog
 {
@@ -34,13 +36,37 @@ namespace DabarBlog
         {
             services.AddLogging(p => p.AddSerilog(dispose: false));
 
-            services.AddHealthChecks();
+            var healthCheckBuilder = services.AddHealthChecks();
+
+            healthCheckBuilder.AddMemoryHealthCheck(thresholdInBytes: 1024L * 1024L);
+
+            healthCheckBuilder.AddUriHealthCheck("Success Codes", check=>
+            {
+                check.Add(option =>
+                {
+                    option.AddUri("https://httpstat.us/200")
+                           .UseExpectedHttpCode(HttpStatusCode.OK);
+                });
+
+                check.Add(option =>
+                {
+                    option.AddUri("https://httpstat.us/203")
+                           .UseExpectedHttpCode(HttpStatusCode.NonAuthoritativeInformation);
+                });
+            });
+
+            //healthCheckBuilder.AddUriHealthCheck("Check Name 2", check =>
+            //{
+            //    check.Add(registration => { registration.Name = "Check2-Uri1"; });
+            //    check.Add(registration => { registration.Name = "Check2-Uri2"; });
+            //});
 
             // Enable GZip and Brotli compression.
             services.Configure<GzipCompressionProviderOptions>(options =>
             {
                 options.Level = CompressionLevel.Fastest;
             });
+
             services.Configure<BrotliCompressionProviderOptions>(options =>
             {
                 options.Level = CompressionLevel.Fastest;
@@ -69,6 +95,7 @@ namespace DabarBlog
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -79,11 +106,6 @@ namespace DabarBlog
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseHealthChecks("/liveness", new HealthCheckOptions
-            {
-                Predicate = (p) => false
-            });
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -95,6 +117,17 @@ namespace DabarBlog
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseHealthChecks("/liveness", new HealthCheckOptions
+            {
+                // Exclude all checks and return a 200-Ok. Default registered health check is self.
+                Predicate = (p) => false
+            });
+
+            app.UseHealthChecks("/healthy", new HealthCheckOptions
+            {
+                ResponseWriter = HealthCheckBuilderExtensions.WriteResponse
+            });
 
             app.UseResponseCompression();
 

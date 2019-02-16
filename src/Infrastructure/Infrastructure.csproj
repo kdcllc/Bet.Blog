@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="$(NetCoreCommonVersion)" />
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="$(NetCoreCommonVersion)" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" Version="$(NetCoreCommonVersion)" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="$(NetCoreCommonVersion)" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="$(NetCoreCommonVersion)" />
@@ -13,6 +14,7 @@
     <PackageReference Include="Microsoft.Extensions.Options" Version="$(NetCoreCommonVersion)" />
     <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="$(NetCoreCommonVersion)" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="$(NetCoreCommonVersion)" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="$(NetCoreCommonVersion)" />
 
     <PackageReference Include="Polly" Version="$(PollyVersion)" />
 
@@ -32,7 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Options\" />
+    <Folder Include="Resilience\Http\" />
   </ItemGroup>
 
 </Project>

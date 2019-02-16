@@ -69,6 +69,7 @@
 
     <MicrosoftAzureKeyVault>3.0.3</MicrosoftAzureKeyVault>
     <MicrosoftExtensionsConfigurationAzureKeyVault>2.2.0</MicrosoftExtensionsConfigurationAzureKeyVault>
+
   </PropertyGroup>
 
   <PropertyGroup Label="Serilog Versions">
@@ -78,7 +79,7 @@
     <SerilogSettingsConfiguration>3.0.1</SerilogSettingsConfiguration>
     <SerilogSinksRollingFile>3.3.0</SerilogSinksRollingFile>
     <SerilogSinksAzureAnalytics>4.0.0</SerilogSinksAzureAnalytics>
-    <SerilogSinksApplicationInsights>2.6.0</SerilogSinksApplicationInsights>
+    <SerilogSinksApplicationInsights>2.6.4</SerilogSinksApplicationInsights>
   </PropertyGroup>
 
 </Project>
