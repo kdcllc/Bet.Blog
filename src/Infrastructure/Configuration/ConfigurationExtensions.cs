@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,7 @@ namespace Microsoft.Extensions.Configuration
         public static void DebugConfigurations(
             this IConfigurationRoot config)
         {
-            var logFactory = new LoggerFactory()
-            .AddConsole(LogLevel.Debug)
-            .AddDebug();
+            var logFactory = GetLoggerFactory();
 
             var logger = logFactory.CreateLogger("Program");
             var allConfigurations = GetAllConfigurations(config);
@@ -94,6 +93,25 @@ namespace Microsoft.Extensions.Configuration
                 configs.AddRange(GetAllConfigurations(pair));
             }
             return configs;
+        }
+
+        /// <summary>
+        ///  Logging migration https://docs.microsoft.com/en-us/aspnet/core/migration/logging-nonaspnetcore?view=aspnetcore-2.2
+        /// </summary>
+        /// <returns></returns>
+        private static ILoggerFactory GetLoggerFactory()
+        {
+            var serviceCollection = new ServiceCollection();
+
+            serviceCollection.AddLogging(builder =>
+            {
+                builder.AddDebug();
+                builder.AddConsole()
+                  .AddFilter((_) => true);
+            });
+
+            return serviceCollection.BuildServiceProvider()
+                    .GetService<ILoggerFactory>();
         }
     }
 }
