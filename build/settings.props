@@ -1,0 +1,14 @@
+<Project>
+
+  <PropertyGroup Label="Basic Settings">
+    <VersionPrefix>1.1.0-pre</VersionPrefix>
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
+    <NoWarn>$(NoWarn);CS1591;CA1032</NoWarn>
+
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <AspNetCoreHostingModel>inprocess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+</Project>

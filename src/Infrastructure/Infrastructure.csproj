@@ -5,28 +5,28 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="$(NetCoreCommonVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" />
+    <PackageReference Include="Microsoft.Extensions.Options" />
+    <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" />
+    <PackageReference Include="Microsoft.Extensions.Http" />
 
-    <PackageReference Include="Polly" Version="$(PollyVersion)" />
+    <PackageReference Include="Polly" />
 
-    <PackageReference Include="Serilog.Extensions.Logging" Version="$(SerilogExtensionsLogging)" />
-    <PackageReference Include="Serilog.Sinks.Console" Version="$(SerilogSinksConsole)" />
-    <PackageReference Include="Serilog.Settings.Configuration" Version="$(SerilogSettingsConfiguration)" />
-    <PackageReference Include="Serilog.Sinks.AzureAnalytics" Version="$(SerilogSinksAzureAnalytics)" />
-    <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="$(SerilogSinksApplicationInsights)" />
-    <PackageReference Include="Serilog.Sinks.RollingFile" Version="$(SerilogSinksRollingFile)" />
+    <PackageReference Include="Serilog.Extensions.Logging" />
+    <PackageReference Include="Serilog.Sinks.Console" />
+    <PackageReference Include="Serilog.Settings.Configuration" />
+    <PackageReference Include="Serilog.Sinks.AzureAnalytics" />
+    <PackageReference Include="Serilog.Sinks.ApplicationInsights" />
+    <PackageReference Include="Serilog.Sinks.RollingFile" />
 
-    <PackageReference Include="Microsoft.Azure.KeyVault" Version="$(MicrosoftAzureKeyVault)" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.AzureKeyVault" Version="$(MicrosoftExtensionsConfigurationAzureKeyVault)" />
+    <PackageReference Include="Microsoft.Azure.KeyVault" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.AzureKeyVault" />
   </ItemGroup>
 
   <ItemGroup>

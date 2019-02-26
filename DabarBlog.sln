@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{EC270762-DA15-4452-A4FB-F6A219053B73}"
 	ProjectSection(SolutionItems) = preProject
 		build\dependencies.props = build\dependencies.props
+		build\settings.props = build\settings.props
 		build\sources.props = build\sources.props
 	EndProjectSection
 EndProject
