@@ -1,23 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DabarBlog.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.ResponseCompression;
 using System.IO.Compression;
 using Serilog;
-using Infrastructure.HealthChecks.UriCheck;
 using System.Net;
 
 namespace DabarBlog
@@ -54,12 +47,6 @@ namespace DabarBlog
                            .UseExpectedHttpCode(HttpStatusCode.NonAuthoritativeInformation);
                 });
             });
-
-            //healthCheckBuilder.AddUriHealthCheck("Check Name 2", check =>
-            //{
-            //    check.Add(registration => { registration.Name = "Check2-Uri1"; });
-            //    check.Add(registration => { registration.Name = "Check2-Uri2"; });
-            //});
 
             // Enable GZip and Brotli compression.
             services.Configure<GzipCompressionProviderOptions>(options =>
@@ -118,16 +105,8 @@ namespace DabarBlog
                 app.UseHsts();
             }
 
-            app.UseHealthChecks("/liveness", new HealthCheckOptions
-            {
-                // Exclude all checks and return a 200-Ok. Default registered health check is self.
-                Predicate = (p) => false
-            });
-
-            app.UseHealthChecks("/healthy", new HealthCheckOptions
-            {
-                ResponseWriter = HealthCheckBuilderExtensions.WriteResponse
-            });
+            app.UseLivenessHealthCheck();
+            app.UseHealthyHealthCheck();
 
             app.UseResponseCompression();
 

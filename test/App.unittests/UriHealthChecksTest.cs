@@ -19,28 +19,13 @@ namespace App.unittests
             var hostBuilder = new WebHostBuilder()
                 .ConfigureServices(services =>
                 {
-                    services.AddHealthChecks()
-                    .AddUriHealthCheck("Successful", builder =>
-                    {
-                        builder.Add(options =>
-                        {
-                            options.AddUri($"http://localhost/api/HttpStat/${statusCode}").UseExpectedHttpCode(statusCode);
-                        });
-                    });
+
                 })
                 .Configure(app=>
                 {
-                    app.UseHealthChecks("/healthy", new HealthCheckOptions
-                    {
-                        ResponseWriter = HealthCheckBuilderExtensions.WriteResponse
-                    });
+
                 });
 
-            var client = new TestServer(hostBuilder).CreateClient();
-
-            var result = await client.GetAsync("/healthy");
-
-            Assert.Equal(statusCode, (int)result.StatusCode);
-        }
+         }
     }
 }

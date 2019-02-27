@@ -23,6 +23,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" />
 
+    <PackageReference Include="Bet.AspNetCore" />
+    <PackageReference Include="Bet.AspNetCore.HealthChecks" />
+    <PackageReference Include="CronScheduler.AspNetCore" Version="1.0.11"/>
   </ItemGroup>
 
   <ItemGroup>
