@@ -9,12 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\**" />
+    <Content Remove="Data\Migrations\**" />
+    <EmbeddedResource Remove="Data\Migrations\**" />
+    <None Remove="Data\Migrations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" Condition="'$(NetCoreTargetVersion)' == 'netcoreapp2.2'" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Condition="'$(NetCoreTargetVersion)' == 'netcoreapp3.0'" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" Condition="'$(NetCoreTargetVersion)' == 'netcoreapp2.2'" PrivateAssets="All"/>
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" Condition="'$(NetCoreTargetVersion)' == 'netcoreapp2.2'" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" />
@@ -27,7 +34,7 @@
     <PackageReference Include="Bet.Extensions" />
     <PackageReference Include="Bet.Extensions.AzureVault" />
     <PackageReference Include="Bet.Extensions.Logging" />
-    <PackageReference Include="CronScheduler.AspNetCore"/>
+    <PackageReference Include="CronScheduler.AspNetCore" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\" />
     <Folder Include="Logs\" />
   </ItemGroup>
 

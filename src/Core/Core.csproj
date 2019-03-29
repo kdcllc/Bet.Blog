@@ -22,6 +22,8 @@
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.3" PrivateAssets="All" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" PrivateAssets="All" />
 
+    <PackageReference Include="Bet.CleanArchitecture.Core" Version="1.1.0-pre" />
+
   </ItemGroup>
 
 </Project>

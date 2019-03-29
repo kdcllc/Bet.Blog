@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace DabarBlog.Data.Migrations
+namespace Infrastructure.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {
