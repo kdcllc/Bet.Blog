@@ -13,3 +13,8 @@ Build Docker
 ```cmd
     docker-compose -f "docker-compose.yml" -f "docker-compose.override.yml"  up -d --build
 ```
+
+```bash
+    dotnet build  DabarBlog.sln   -p:NetCoreVersion=netcore22
+    dotnet build  DabarBlog.sln   -p:NetCoreVersion=netcore30       
+```

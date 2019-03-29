@@ -16,15 +16,12 @@ namespace DabarBlog
             WebHost.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((hostingContext, configBuilder) =>
                 {
-                    var config = configBuilder.Build();
-
                     var envName = hostingContext.HostingEnvironment.EnvironmentName;
 
-                    config = configBuilder.AddAzureKeyVault(hostingEnviromentName:envName,usePrefix:true);
+                    var configuration = configBuilder.AddAzureKeyVault(hostingEnviromentName: envName, usePrefix: true);
 
-                    config.DebugConfigurationsWithSerilog();
+                    configuration.DebugConfigurationsWithSerilog();
                 })
-                .UseStartup<Startup>()
                 .UseSerilog((hostingContext, loggerConfiguration) =>
                 {
                     loggerConfiguration
@@ -34,6 +31,7 @@ namespace DabarBlog
                           .AddApplicationInsights(hostingContext.Configuration)
                           .AddAzureLogAnalytics(hostingContext.Configuration);
                 })
+                .UseStartup<Startup>()
                 .ConfigureKestrel(a => a.AddServerHeader = false);
     }
 }
