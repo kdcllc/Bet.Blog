@@ -5,13 +5,13 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using DabarBlog.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.ResponseCompression;
 using System.IO.Compression;
 using Serilog;
 using System.Net;
+using Infrastructure.Data;
 
 namespace DabarBlog
 {
@@ -33,7 +33,7 @@ namespace DabarBlog
 
             healthCheckBuilder.AddMemoryHealthCheck(thresholdInBytes: 1024L * 1024L);
 
-            healthCheckBuilder.AddUriHealthCheck("Success Codes", check=>
+            healthCheckBuilder.AddUriHealthCheck("Success Codes", check =>
             {
                 check.Add(option =>
                 {
@@ -79,13 +79,22 @@ namespace DabarBlog
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddIdentity<AppUser, IdentityRole>(options =>
+                {
+                    options.Password.RequireDigit = false;
+                    options.Password.RequiredLength = 4;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireLowercase = false;
+                    options.User.AllowedUserNameCharacters = null;
+                })
                 .AddDefaultUI(UIFramework.Bootstrap4)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddDefaultTokenProviders()
+                .AddEntityFrameworkStores<AppDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
         }
