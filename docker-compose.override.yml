@@ -16,6 +16,7 @@ services:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
 
   app.sqldb:
+    image: microsoft/mssql-server-linux
     ports:
      - "5468:1433"
     environment:

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace App.unittests
+namespace App.Unittests
 {
     public class TestStartup
     {
@@ -10,9 +10,7 @@ namespace App.unittests
         {
         }
 
-        public void Configure(
-           IApplicationBuilder app,
-           IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
         }
     }

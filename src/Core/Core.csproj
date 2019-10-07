@@ -1,29 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>$(NetCoreTargetVersion)</TargetFramework>
-    <CodeAnalysisRuleSet>Dabablog.ruleset</CodeAnalysisRuleSet>
+    <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Dabablog.ruleset" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Dabablog.ruleset">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" />
-
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.3" PrivateAssets="All" />
-    <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" PrivateAssets="All" />
-
-    <PackageReference Include="Bet.CleanArchitecture.Core" Version="1.1.0-pre" />
-
+    <PackageReference Include="Bet.CleanArchitecture.Core"/>
   </ItemGroup>
 
 </Project>

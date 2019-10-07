@@ -1,71 +1,29 @@
 <Project>
+  <PropertyGroup>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <NetCoreCommonVersion>3.0.0</NetCoreCommonVersion>
+    <BetCoreCommon>1.4.2</BetCoreCommon>
+  </PropertyGroup>
 
   <PropertyGroup>
-    <NetCoreCommonVersion>2.2.*</NetCoreCommonVersion>
-    <BetCoreCommon>1.1.17</BetCoreCommon>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp2.2' Or '$(TargetFramework)' == 'netstandard2.0'">
-    <NetCoreCommonVersion>2.2.*</NetCoreCommonVersion>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
-    <NetCoreCommonVersion>3.0.0-preview3-*</NetCoreCommonVersion>
+    <NetCoreCommonVersion>3.0.0</NetCoreCommonVersion>
   </PropertyGroup>
 
   <ItemGroup Label="Microft.AspNetCore">
-    <PackageReference Update="Microsoft.AspNetCore.Authentication.Cookies" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Update="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Update="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Update="Microsoft.AspNetCore.Hosting.Abstractions" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Update="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Update="Microsoft.AspNetCore.Identity.UI" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Update="Microsoft.AspNetCore.Mvc" Version="$(NetCoreCommonVersion)"/>
-    <PackageReference Update="Microsoft.AspNetCore.Mvc.Core" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Update="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Update="Microsoft.AspNetCore.Mvc.Testing" Version="$(NetCoreCommonVersion)"/>
-    <PackageReference Update="Microsoft.AspNetCore.Razor" Version="$(NetCoreCommonVersion)"/>
-    <PackageReference Update="Microsoft.AspNetCore.Razor.Design" Version="2.2.*" PrivateAssets="All" />
-    <PackageReference Update="Microsoft.AspNetCore.Routing" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Update="Microsoft.AspNetCore.StaticFiles" Version="$(NetCoreCommonVersion)" />
     <PackageReference Update="Microsoft.AspNetCore.TestHost" Version="$(NetCoreCommonVersion)" />
   </ItemGroup>
 
   <ItemGroup Label="Microsoft.EntityFrameworkCore">
+    <PackageReference Update="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="$(NetCoreCommonVersion)" />
+    <PackageReference Update="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="$(NetCoreCommonVersion)" />
+    <PackageReference Update="Microsoft.AspNetCore.Identity.UI" Version="$(NetCoreCommonVersion)" />
     <PackageReference Update="Microsoft.EntityFrameworkCore" Version="$(NetCoreCommonVersion)" />
     <PackageReference Update="Microsoft.EntityFrameworkCore.SqlServer" Version="$(NetCoreCommonVersion)" />
     <PackageReference Update="Microsoft.EntityFrameworkCore.Tools" Version="$(NetCoreCommonVersion)" />
   </ItemGroup>
 
-  <ItemGroup Label="Microsoft.Extensions">
-    <PackageReference Update="Microsoft.Extensions.Configuration.AzureKeyVault" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Update="Microsoft.Extensions.Identity.Stores" Version="$(NetCoreCommonVersion)" Condition="'$(NetCoreTargetVersion)' == 'netcoreapp3.0'"/>
-    <PackageReference Update="Microsoft.Extensions.Configuration.Binder" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Update="Microsoft.Extensions.DependencyInjection" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Update="Microsoft.Extensions.Diagnostics.HealthChecks" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Update="Microsoft.Extensions.FileProviders.Abstractions" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Update="Microsoft.Extensions.Hosting" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Update="Microsoft.Extensions.Http" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Update="Microsoft.Extensions.Http.Polly" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Update="Microsoft.Extensions.Logging.Console" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Update="Microsoft.Extensions.Logging.Debug" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Update="Microsoft.Extensions.Options" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Update="Microsoft.Extensions.Options.ConfigurationExtensions" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Update="Microsoft.Extensions.Options.DataAnnotations" Version="$(NetCoreCommonVersion)" />
-    <PackageReference Update="Microsoft.Extensions.FileProviders.Abstractions" Version="$(NetCoreCommonVersion)" />
-  </ItemGroup>
-
-  <ItemGroup Label="Microsoft.AspNetCore">
-    <PackageReference Update="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.4.4" />
-  </ItemGroup>
-
-
-  <ItemGroup Label="StyleCop">
-    <PackageReference Update="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.3" PrivateAssets="All" />
-    <PackageReference Update="StyleCop.Analyzers" Version="1.0.2" PrivateAssets="All" />
-  </ItemGroup>
-
-  <ItemGroup Label="Others">
+ <ItemGroup Label="Others">
+    <PackageReference Update="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.5" />
     <PackageReference Update="Serilog.AspNetCore" Version="2.1.1" />
     <PackageReference Update="CronScheduler.AspNetCore" Version="1.0.11"/>
     <PackageReference Update="Polly" Version="7.0.2" />
@@ -81,6 +39,7 @@
     <PackageReference Update="Bet.Extensions.AzureVault" Version="$(BetCoreCommon)" />
     <PackageReference Update="Bet.Extensions.Logging" Version="$(BetCoreCommon)" />
     <PackageReference Update="Bet.Extensions.Options" Version="$(BetCoreCommon)" />
+    <PackageReference Update="Bet.CleanArchitecture.Core" Version="$(BetCoreCommon)"/>
   </ItemGroup>
 
   <ItemGroup Label="UnitTests">
@@ -88,6 +47,10 @@
     <PackageReference Update="Moq" Version="4.10.1" />
     <PackageReference Update="xunit" Version="2.4.1" />
     <PackageReference Update="xunit.runner.visualstudio" Version="2.4.1" />
+  </ItemGroup>
+
+  <ItemGroup Label="Analyzers">
+    <PackageReference Include="Bet.CodeAnalyzers" Version="1.0.6" PrivateAssets="All" />
   </ItemGroup>
 
 </Project>

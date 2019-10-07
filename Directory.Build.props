@@ -1,20 +1,4 @@
 <Project>
-  <Choose>
-    <When Condition=" '$(NetCoreVersion)' == 'netcore30'">
-      <PropertyGroup>
-        <NetCoreTargetVersion>netcoreapp3.0</NetCoreTargetVersion>
-        <NetCoreCommonVersion>3.0.0-preview.19074.2</NetCoreCommonVersion>
-      </PropertyGroup>
-    </When>
-
-    <When Condition=" '$(NetCoreVersion)' == 'netcore22'  Or '$(NetCoreVersion)' == '' ">
-      <PropertyGroup>
-        <NetCoreTargetVersion>netcoreapp2.2</NetCoreTargetVersion>
-        <NetCoreCommonVersion>2.2.0</NetCoreCommonVersion>
-      </PropertyGroup>
-    </When>
-  </Choose>
-
   <Import Project="build\settings.props" />
   <Import Project="build\sources.props" />
 

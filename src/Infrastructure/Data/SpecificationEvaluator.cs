@@ -1,13 +1,17 @@
-﻿using Bet.CleanArchitecture.Core.Entities;
+﻿using System.Linq;
+
+using Bet.CleanArchitecture.Core.Entities;
 using Bet.CleanArchitecture.Core.Interfaces;
+
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace Infrastructure.Data
 {
-    public class SpecificationEvaluator<T, TKey> where T : BaseEntity<TKey>
+    public static class SpecificationEvaluator<T, TKey> where T : BaseEntity<TKey>
     {
+#pragma warning disable CA1000 // Do not declare static members on generic types
         public static IQueryable<T> GetQuery(IQueryable<T> inputQuery, ISpecification<T> specification)
+#pragma warning restore CA1000 // Do not declare static members on generic types
         {
             var query = inputQuery;
 
@@ -18,12 +22,14 @@ namespace Infrastructure.Data
             }
 
             // Includes all expression-based includes
-            query = specification.Includes.Aggregate(query,
-                                    (current, include) => current.Include(include));
+            query = specification.Includes.Aggregate(
+                query,
+                (current, include) => current.Include(include));
 
             // Include any string-based include statements
-            query = specification.IncludeStrings.Aggregate(query,
-                                    (current, include) => current.Include(include));
+            query = specification.IncludeStrings.Aggregate(
+                query,
+                (current, include) => current.Include(include));
 
             // Apply ordering if expressions are set
             if (specification.OrderBy != null)
@@ -41,6 +47,7 @@ namespace Infrastructure.Data
                 query = query.Skip(specification.Skip)
                              .Take(specification.Take);
             }
+
             return query;
         }
     }

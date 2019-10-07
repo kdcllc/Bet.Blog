@@ -2,6 +2,7 @@
 
 namespace Infrastructure.Data
 {
-    public class AppUser : IdentityUser { }
-
+    public class AppUser : IdentityUser
+    {
+    }
 }
