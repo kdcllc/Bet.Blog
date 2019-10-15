@@ -14,8 +14,8 @@ variables:
   solutionName: 'DabarBlog.sln'
 
 steps:
-- script: | 
-   dotnet build $(solutionName) --configuration $(buildConfiguration) 
+- script: |
+   dotnet build $(solutionName) --configuration $(buildConfiguration)
    dotnet publish src/App/App.csproj --configuration $(buildConfiguration) --output $BUILD_ARTIFACTSTAGINGDIRECTORY
 
 
