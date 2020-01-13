@@ -1,3 +1,5 @@
+# build: docker-compose -f "docker-compose.yml" -f "docker-compose.override.yml" up -d --build
+
 version: '3.4'
 
 services:
@@ -6,7 +8,8 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - ASPNETCORE_HTTPS_PORT=6001
-      - ConnectionStrings:DefaultConnection=Server=app.sqldb;Database=aspnetapp;User Id=sa;Password=Pass@word
+      - ConnectionStrings:SqlServerConnection=Server=app.sqldb;Database=aspnetapp;User Id=sa;Password=Pass@word
+      - Serilog:WriteTo:Args:pathFormat=app/Logs/DabarBlog-log-{Date}.json
 
     ports:
       - "6000:80"
@@ -16,6 +19,7 @@ services:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
 
   app.sqldb:
+    image: microsoft/mssql-server-linux
     ports:
      - "5468:1433"
     environment:

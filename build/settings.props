@@ -1,6 +1,13 @@
 <Project>
 
+  <PropertyGroup Label="Ownership Settings">
+    <Company>King David Consulting LLC</Company>
+    <Authors>kdcllc</Authors>
+    <Copyright>Copyright © King David Consulting LLC</Copyright>
+  </PropertyGroup>
+
   <PropertyGroup Label="Basic Settings">
+
     <VersionPrefix>1.1.0-pre</VersionPrefix>
     <LangVersion>latest</LangVersion>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
@@ -9,6 +16,16 @@
 
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <AspNetCoreHostingModel>inprocess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Docker">
+    <!-- kdcllc docker image specifics -->
+    <PROJECT_PATH></PROJECT_PATH>
+    <RUNTESTS>"false"</RUNTESTS>
+    <VERBOSE>"false"</VERBOSE>
+    <SOLUTION_BASE>"false"</SOLUTION_BASE>
+    <DOCKER_BUILD_ARGS>--build-arg RUNTESTS=$(RUNTESTS) --build-arg VERBOSE=$(VERBOSE) --build-arg SOLUTION_BASE=$(SOLUTION_BASE)</DOCKER_BUILD_ARGS>
+    <DockerfileContext>../../.</DockerfileContext>
   </PropertyGroup>
 
 </Project>

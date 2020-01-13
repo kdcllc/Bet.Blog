@@ -1,31 +1,18 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+﻿using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
-using System.Threading.Tasks;
+
 using Xunit;
 
-namespace App.unittests
+namespace App.Unittests
 {
-    public class UriHealthChecks
+    public class UriHealthChecksTest
     {
-
         [Fact]
-        public async Task Check()
+        public Task Check()
         {
-            var statusCode = 200;
-
-            var hostBuilder = new WebHostBuilder()
-                .ConfigureServices(services =>
-                {
-
-                })
-                .Configure(app=>
-                {
-
-                });
-
-         }
+            return null;
+        }
     }
 }

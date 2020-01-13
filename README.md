@@ -13,3 +13,9 @@ Build Docker
 ```cmd
     docker-compose -f "docker-compose.yml" -f "docker-compose.override.yml"  up -d --build
 ```
+
+## [Dotnet EF global tooling](https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet)
+
+```bash
+    dotnet tool install --global dotnet-ef
+```

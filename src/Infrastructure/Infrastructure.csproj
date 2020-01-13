@@ -1,32 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>$(NetCoreTargetVersion)</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" />
-    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" />
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" />
-    <PackageReference Include="Microsoft.Extensions.Options" />
-    <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" />
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" />
-    <PackageReference Include="Microsoft.Extensions.Http" />
-
-    <PackageReference Include="Polly" />
-
-    <PackageReference Include="Serilog.Extensions.Logging" />
-    <PackageReference Include="Serilog.Sinks.Console" />
-    <PackageReference Include="Serilog.Settings.Configuration" />
-    <PackageReference Include="Serilog.Sinks.AzureAnalytics" />
-    <PackageReference Include="Serilog.Sinks.ApplicationInsights" />
-    <PackageReference Include="Serilog.Sinks.RollingFile" />
-
-    <PackageReference Include="Microsoft.Azure.KeyVault" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.AzureKeyVault" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" />
   </ItemGroup>
 
   <ItemGroup>

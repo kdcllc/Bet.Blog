@@ -1,17 +1,19 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
+﻿using System.IO.Compression;
+using System.Net;
+
+using Infrastructure.Data;
+
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
-using DabarBlog.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.ResponseCompression;
-using System.IO.Compression;
+using Microsoft.Extensions.Hosting;
+
 using Serilog;
-using System.Net;
 
 namespace DabarBlog
 {
@@ -33,7 +35,7 @@ namespace DabarBlog
 
             healthCheckBuilder.AddMemoryHealthCheck(thresholdInBytes: 1024L * 1024L);
 
-            healthCheckBuilder.AddUriHealthCheck("Success Codes", check=>
+            healthCheckBuilder.AddUriHealthCheck("Success Codes", check =>
             {
                 check.Add(option =>
                 {
@@ -79,19 +81,47 @@ namespace DabarBlog
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<BloggingContext>(options =>
+            {
+                var provider = Configuration.GetValue<string>("DatabaseProvider");
+                if (provider == "Sqlite")
+                {
+                    // used for k8s PVC mapping, otherwise is created in the root
+                    var dbPath = Configuration.GetValue<string>("DatabasePath");
 
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddDefaultUI(UIFramework.Bootstrap4)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                    var connectionString = $"Filename={dbPath}blog.db";
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
+                    options.UseSqlite(
+                        connectionString,
+                        b => b.MigrationsAssembly("Infrastructure.Data.Sqlite"));
+                }
+
+                if (provider == "SqlServer")
+                {
+                    options.UseSqlServer(
+                        Configuration.GetConnectionString("SqlServerConnection"),
+                        b => b.MigrationsAssembly("Infrastructure.Data.SqlServer"));
+                }
+            });
+
+            services.AddIdentity<AppUser, IdentityRole>(options =>
+                {
+                    options.Password.RequireDigit = false;
+                    options.Password.RequiredLength = 4;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireLowercase = false;
+                    options.User.AllowedUserNameCharacters = null;
+                })
+                .AddDefaultTokenProviders()
+                .AddEntityFrameworkStores<BloggingContext>();
+
+            services.AddControllersWithViews();
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -101,12 +131,10 @@ namespace DabarBlog
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
-            app.UseLivenessHealthCheck();
-            app.UseHealthyHealthCheck();
 
             app.UseResponseCompression();
 
@@ -114,13 +142,20 @@ namespace DabarBlog
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            app.UseAuthentication();
+            app.UseRouting();
 
-            app.UseMvc(routes =>
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
+
+                endpoints.MapLivenessHealthCheck();
+                endpoints.MapHealthyHealthCheck();
             });
         }
     }
