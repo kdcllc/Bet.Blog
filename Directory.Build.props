@@ -1,11 +1,9 @@
 <Project>
-  <Import Project="build\settings.props" />
-  <Import Project="build\sources.props" />
 
-  <PropertyGroup Label="Ownership Settings">
-    <Company>King David Consulting LLC</Company>
-    <Authors>kdcllc</Authors>
-    <Copyright>Copyright © King David Consulting LLC</Copyright>
+  <PropertyGroup>
     <RepositoryRoot>$(MSBuildThisFileDirectory)</RepositoryRoot>
   </PropertyGroup>
+
+  <Import Project="build\settings.props" />
+  <Import Project="build\sources.props" />
 </Project>

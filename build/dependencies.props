@@ -1,12 +1,8 @@
 <Project>
   <PropertyGroup>
     <RunCodeAnalysis>true</RunCodeAnalysis>
-    <NetCoreCommonVersion>3.0.0</NetCoreCommonVersion>
-    <BetCoreCommon>1.4.2</BetCoreCommon>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <NetCoreCommonVersion>3.0.0</NetCoreCommonVersion>
+    <NetCoreCommonVersion>3.1.0</NetCoreCommonVersion>
+    <BetCoreCommon>2.1.0 </BetCoreCommon>
   </PropertyGroup>
 
   <ItemGroup Label="Microft.AspNetCore">
@@ -17,6 +13,8 @@
     <PackageReference Update="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="$(NetCoreCommonVersion)" />
     <PackageReference Update="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="$(NetCoreCommonVersion)" />
     <PackageReference Update="Microsoft.AspNetCore.Identity.UI" Version="$(NetCoreCommonVersion)" />
+    <PackageReference Update="Microsoft.EntityFrameworkCore.Relational" Version="$(NetCoreCommonVersion)" />
+    <PackageReference Update="Microsoft.EntityFrameworkCore.Sqlite" Version="$(NetCoreCommonVersion)" />
     <PackageReference Update="Microsoft.EntityFrameworkCore" Version="$(NetCoreCommonVersion)" />
     <PackageReference Update="Microsoft.EntityFrameworkCore.SqlServer" Version="$(NetCoreCommonVersion)" />
     <PackageReference Update="Microsoft.EntityFrameworkCore.Tools" Version="$(NetCoreCommonVersion)" />
@@ -24,8 +22,8 @@
 
  <ItemGroup Label="Others">
     <PackageReference Update="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.5" />
-    <PackageReference Update="Serilog.AspNetCore" Version="2.1.1" />
-    <PackageReference Update="CronScheduler.AspNetCore" Version="1.0.11"/>
+    <PackageReference Update="Serilog.AspNetCore" Version="3.2.0" />
+    <PackageReference Update="CronScheduler.AspNetCore" Version="2.0.0"/>
     <PackageReference Update="Polly" Version="7.0.2" />
     <PackageReference Update="Microsoft.Azure.KeyVault" Version="3.0.3" />
   </ItemGroup>
@@ -43,14 +41,14 @@
   </ItemGroup>
 
   <ItemGroup Label="UnitTests">
-    <PackageReference Update="Microsoft.NET.Test.Sdk" Version="16.0.1" />
-    <PackageReference Update="Moq" Version="4.10.1" />
+    <PackageReference Update="Microsoft.NET.Test.Sdk" Version="16.4.0" />
+    <PackageReference Update="Moq" Version="4.13.1" />
     <PackageReference Update="xunit" Version="2.4.1" />
     <PackageReference Update="xunit.runner.visualstudio" Version="2.4.1" />
   </ItemGroup>
 
   <ItemGroup Label="Analyzers">
-    <PackageReference Include="Bet.CodeAnalyzers" Version="1.0.6" PrivateAssets="All" />
+    <PackageReference Include="Bet.CodeAnalyzers" Version="1.0.7" PrivateAssets="All" />
   </ItemGroup>
 
 </Project>

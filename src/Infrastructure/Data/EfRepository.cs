@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 using Bet.CleanArchitecture.Core.Entities;
 using Bet.CleanArchitecture.Core.Interfaces;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 using Serilog;
 
@@ -116,9 +117,6 @@ namespace DabarBlog
                 app.UseHsts();
             }
 
-            app.UseLivenessHealthCheck();
-            app.UseHealthyHealthCheck();
-
             app.UseResponseCompression();
 
             app.UseHttpsRedirection();
@@ -136,6 +134,9 @@ namespace DabarBlog
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+
+                endpoints.MapLivenessHealthCheck();
+                endpoints.MapHealthyHealthCheck();
             });
         }
     }
