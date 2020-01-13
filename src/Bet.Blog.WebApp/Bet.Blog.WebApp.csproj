@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
 
-    <ContainerDevelopmentMode>Regular</ContainerDevelopmentMode>
 
     <UserSecretsId>2a334eee-954c-4d36-8b15-4ca8015088bf</UserSecretsId>
     <AspNetCoreHostingModel>$(AspNetCoreHostingModel)</AspNetCoreHostingModel>
@@ -14,6 +13,7 @@
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
     <PreserveCompilationReferences>true</PreserveCompilationReferences>
     <IdentityUIFrameworkVersion>Bootstrap4</IdentityUIFrameworkVersion>
+    <AssemblyName>Bet.Blog.WebApp</AssemblyName>
 
   </PropertyGroup>
 
