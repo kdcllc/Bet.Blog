@@ -14,11 +14,13 @@
     <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
     <NoWarn>$(NoWarn);CS1591;CA1032</NoWarn>
 
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <AspNetCoreHostingModel>inprocess</AspNetCoreHostingModel>
   </PropertyGroup>
 
   <PropertyGroup Label="Docker">
+
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+
     <!-- kdcllc docker image specifics -->
     <PROJECT_PATH></PROJECT_PATH>
     <RUNTESTS>"false"</RUNTESTS>

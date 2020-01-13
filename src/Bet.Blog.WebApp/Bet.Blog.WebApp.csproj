@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <ContainerDevelopmentMode>Regular</ContainerDevelopmentMode>
+
+    <UserSecretsId>2a334eee-954c-4d36-8b15-4ca8015088bf</UserSecretsId>
+    <AspNetCoreHostingModel>$(AspNetCoreHostingModel)</AspNetCoreHostingModel>
+
+    <DockerDefaultTargetOS>$(DockerDefaultTargetOS)</DockerDefaultTargetOS>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <PreserveCompilationReferences>true</PreserveCompilationReferences>
+    <IdentityUIFrameworkVersion>Bootstrap4</IdentityUIFrameworkVersion>
+
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bet.AspNetCore" />
+    <PackageReference Include="Bet.AspNetCore.HealthChecks" />
+    <PackageReference Include="Bet.AspNetCore.Logging" />
+    <PackageReference Include="Bet.AspNetCore.ReCapture" />
+    <PackageReference Include="Bet.Extensions" />
+    <PackageReference Include="Bet.Extensions.AzureVault" />
+    <PackageReference Include="Bet.Extensions.Logging" />
+
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" />
+    <PackageReference Include="Serilog.AspNetCore" />
+
+    <PackageReference Include="CronScheduler.AspNetCore" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Bet.Blog.Data\Bet.Blog.Data.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup Label="Docker">
+    <!--https://docs.microsoft.com/en-us/visualstudio/containers/container-msbuild-properties?view=vs-2019-->
+    <DockerfileFile>../../src/Bet.Blog.WebApp/Dockerfile</DockerfileFile>
+    <PROJECT_PATH>/src/Bet.Blog.WebApp/Bet.Blog.WebApp.csproj</PROJECT_PATH>
+    <DockerfileBuildArguments>--build-arg PROJECT_PATH=$(PROJECT_PATH) $(DOCKER_BUILD_ARGS)</DockerfileBuildArguments>
+  </PropertyGroup>
+
+</Project>

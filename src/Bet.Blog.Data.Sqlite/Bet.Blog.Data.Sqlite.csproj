@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Bet.Blog.Data\Bet.Blog.Data.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputPath>..\Bet.Blog.WebApp\bin\$(Configuration)\</OutputPath>
+  </PropertyGroup>
+
+</Project>

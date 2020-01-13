@@ -1,4 +1,4 @@
-# DabarBlog Project
+# Bet.Blog Project
 
 The goal of this project is to develop a blogging platform for Biblical oriented bloggers.
 
