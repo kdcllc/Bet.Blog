@@ -1,8 +1,18 @@
 version: '3.4'
 
 services:
+  base:
+    image: betblogbase:v1
+    build:
+      context: .
+      dockerfile: Dockerfile.base
+      args:
+        SOLUTION_BASE: "true"
+        NUGET_RESTORE: "-v d"
+        RUNTESTS: "false"
+        VERBOSE: "false"
   app:
-    image: kdcllc/dabarblog
+    image: kdcllc/betblog:v1
     build:
       context: .
       dockerfile: src/App/Dockerfile
@@ -11,3 +21,5 @@ services:
         VERBOSE: "false"
         PROJECT_PATH: "/src/App/App.csproj"
         SOLUTION_BASE: "false"
+    depends_on:
+      - base

@@ -11,9 +11,9 @@ namespace Infrastructure.Data
 {
     public class EfRepository<T, TKey> : IAsyncRepository<T, TKey> where T : BaseEntity<TKey>
     {
-        protected readonly AppDbContext _dbContext;
+        protected readonly BloggingContext _dbContext;
 
-        public EfRepository(AppDbContext dbContext)
+        public EfRepository(BloggingContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -60,7 +60,7 @@ namespace Infrastructure.Data
 
         private IQueryable<T> ApplySpecification(ISpecification<T> spec)
         {
-            return SpecificationEvaluator<T,TKey>.GetQuery(_dbContext.Set<T>().AsQueryable(), spec);
+            return SpecificationEvaluator<T, TKey>.GetQuery(_dbContext.Set<T>().AsQueryable(), spec);
         }
     }
 }

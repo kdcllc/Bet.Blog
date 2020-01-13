@@ -81,9 +81,28 @@ namespace DabarBlog
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<BloggingContext>(options =>
+            {
+                var provider = Configuration.GetValue<string>("DatabaseProvider");
+                if (provider == "Sqlite")
+                {
+                    // used for k8s PVC mapping, otherwise is created in the root
+                    var dbPath = Configuration.GetValue<string>("DatabasePath");
+
+                    var connectionString = $"Filename={dbPath}blog.db";
+
+                    options.UseSqlite(
+                        connectionString,
+                        b => b.MigrationsAssembly("Infrastructure.Data.Sqlite"));
+                }
+
+                if (provider == "SqlServer")
+                {
+                    options.UseSqlServer(
+                        Configuration.GetConnectionString("SqlServerConnection"),
+                        b => b.MigrationsAssembly("Infrastructure.Data.SqlServer"));
+                }
+            });
 
             services.AddIdentity<AppUser, IdentityRole>(options =>
                 {
@@ -95,7 +114,7 @@ namespace DabarBlog
                     options.User.AllowedUserNameCharacters = null;
                 })
                 .AddDefaultTokenProviders()
-                .AddEntityFrameworkStores<AppDbContext>();
+                .AddEntityFrameworkStores<BloggingContext>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();

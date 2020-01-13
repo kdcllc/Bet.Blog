@@ -1,4 +1,4 @@
-FROM kdcllc/dotnet-sdk:3.1 as builder
+FROM betblogbase:v1 as builder
 
 RUN dotnet publish "./src/App/App.csproj" -c Release -o /app
 

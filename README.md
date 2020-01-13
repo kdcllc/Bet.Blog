@@ -14,7 +14,8 @@ Build Docker
     docker-compose -f "docker-compose.yml" -f "docker-compose.override.yml"  up -d --build
 ```
 
+## [Dotnet EF global tooling](https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet)
+
 ```bash
-    dotnet build  DabarBlog.sln   -p:NetCoreVersion=netcore22
-    dotnet build  DabarBlog.sln   -p:NetCoreVersion=netcore30       
+    dotnet tool install --global dotnet-ef
 ```
