@@ -3,6 +3,10 @@
 version: '3.4'
 
 services:
+  bet.blog.webapp:
+    environment:
+      - ConnectionStrings:SqlServerConnection=Server=app.sqldb;Database=aspnetapp;User Id=sa;Password=Pass@word
+
   bet.blog.sqldb:
     image: microsoft/mssql-server-linux
     ports:

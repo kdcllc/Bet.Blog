@@ -1,14 +1,20 @@
-# docker build --rm -f "./src/Bet.Blog.WebApp/Dockerfile" -t kdcll/betblog:v1 .
+#------------------------------------------------------------------------------------------------------------------------
+#
+# BUILD: docker build --rm -f "./src/Bet.Blog.WebApp/Dockerfile" -t kdcllc/betblog:v1 .
+#
+# REBUILD: docker build --no-cache --rm -f "./src/Bet.Blog.WebApp/Dockerfile" -t kdcllc/betblog:v1 .
+#
+# RUN: docker run -d -p 4002:80 -e ASPNETCORE_ENVIRONMENT=Development -e MSI_ENDPOINT=$Env:MSI_ENDPOINT -e MSI_SECRET=$Env:MSI_SECRET kdcllc/betblog:v1
+#
+#------------------------------------------------------------------------------------------------------------------------
 
+FROM kdcllc/betblog:base as builder
+RUN dotnet publish "./src/Bet.Blog.WebApp/Bet.Blog.WebApp.csproj" -r linux-musl-x64 -o out --self-contained true /p:PublishTrimmed=true
 
-ARG PROJECT_PATH="./src/Bet.Blog.WebApp/Bet.Blog.WebApp.csproj"
-
-FROM betblogbase:v1 as builder
-
-RUN dotnet publish "./src/Bet.Blog.WebApp/Bet.Blog.WebApp.csproj" -c Release -o /app
-
-# App image
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS final
+FROM mcr.microsoft.com/dotnet/core/runtime-deps:3.1-alpine AS runtime
 WORKDIR /app
-COPY --from=builder /app .
-ENTRYPOINT ["dotnet", "Bet.Blog.WebApp.dll"]
+
+COPY --from=builder /app/out ./
+ENTRYPOINT ["./Bet.Blog.WebApp"]
+
+

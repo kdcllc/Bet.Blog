@@ -8,7 +8,11 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - ASPNETCORE_HTTPS_PORT=6001
-      - ConnectionStrings:SqlServerConnection=Server=app.sqldb;Database=aspnetapp;User Id=sa;Password=Pass@word
+      - EnableHttpsRedirection=true
+      
+      # in order for this key vault to work run appauthentication run --verbose:debug before opening the application in the visual studio code.
+      - MSI_ENDPOINT=${MSI_ENDPOINT}
+      - MSI_SECRET=${MSI_SECRET}
 
     ports:
       - "6000:80"

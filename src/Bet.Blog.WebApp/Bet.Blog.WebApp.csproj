@@ -5,31 +5,24 @@
 
 
     <UserSecretsId>2a334eee-954c-4d36-8b15-4ca8015088bf</UserSecretsId>
-    <AspNetCoreHostingModel>$(AspNetCoreHostingModel)</AspNetCoreHostingModel>
 
     <DockerDefaultTargetOS>$(DockerDefaultTargetOS)</DockerDefaultTargetOS>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
 
-    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
-    <PreserveCompilationReferences>true</PreserveCompilationReferences>
-    <IdentityUIFrameworkVersion>Bootstrap4</IdentityUIFrameworkVersion>
-    <AssemblyName>Bet.Blog.WebApp</AssemblyName>
-
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bet.AspNetCore" />
+    <PackageReference Include="Bet.AspNetCore.AzureStorage" />
     <PackageReference Include="Bet.AspNetCore.HealthChecks" />
     <PackageReference Include="Bet.AspNetCore.Logging" />
     <PackageReference Include="Bet.AspNetCore.ReCapture" />
-    <PackageReference Include="Bet.Extensions" />
+    <PackageReference Include="Bet.AspNetCore.Middleware" />
     <PackageReference Include="Bet.Extensions.AzureVault" />
-    <PackageReference Include="Bet.Extensions.Logging" />
 
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" />
+
+
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" />
     <PackageReference Include="Serilog.AspNetCore" />
 

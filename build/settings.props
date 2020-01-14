@@ -14,7 +14,6 @@
     <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
     <NoWarn>$(NoWarn);CS1591;CA1032</NoWarn>
 
-    <AspNetCoreHostingModel>inprocess</AspNetCoreHostingModel>
   </PropertyGroup>
 
   <PropertyGroup Label="Docker">
@@ -26,8 +25,12 @@
     <RUNTESTS>"false"</RUNTESTS>
     <VERBOSE>"false"</VERBOSE>
     <SOLUTION_BASE>"false"</SOLUTION_BASE>
-    <DOCKER_BUILD_ARGS>--build-arg RUNTESTS=$(RUNTESTS) --build-arg VERBOSE=$(VERBOSE) --build-arg SOLUTION_BASE=$(SOLUTION_BASE)</DOCKER_BUILD_ARGS>
+    <NUGET_RESTORE>"-v=m"</NUGET_RESTORE>
+    <DOCKER_BUILD_ARGS>--build-arg RUNTESTS=$(RUNTESTS) --build-arg NUGET_RESTORE=$(NUGET_RESTORE) --build-arg VERBOSE=$(VERBOSE) --build-arg SOLUTION_BASE=$(SOLUTION_BASE)</DOCKER_BUILD_ARGS>
+
     <DockerfileContext>../../.</DockerfileContext>
+    <DockerfileRunArguments Condition="'$(MSI_ENDPOINT)' == '' And '$(MSI_SECRET)' == '' ">-e "MSI_ENDPOINT=$(MSI_ENDPOINT)" -e "MSI_SECRET=$(MSI_SECRET)"</DockerfileRunArguments>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
 </Project>

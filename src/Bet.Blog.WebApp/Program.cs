@@ -26,19 +26,29 @@ namespace Bet.Blog.WebApp
                         webBuilder.ConfigureAppConfiguration((hostingContext, configBuilder) =>
                         {
                             var envName = hostingContext.HostingEnvironment.EnvironmentName;
-                            var configuration = configBuilder.AddAzureKeyVault(hostingEnviromentName: envName, usePrefix: true);
-                            configuration.DebugConfigurationsWithSerilog();
-                        })
-                        .UseSerilog((hostingContext, loggerConfiguration) =>
+                            var configuration = configBuilder.AddAzureKeyVault(
+                                hostingEnviromentName: envName,
+                                usePrefix: true,
+                                reloadInterval: TimeSpan.FromSeconds(20));
+
+                            // if (hostingContext.HostingEnvironment.IsDevelopment())
+                            // {
+                                configuration.DebugConfigurations();
+                            //}
+                        });
+
+                        webBuilder.UseSerilog((hostingContext, loggerConfiguration) =>
                         {
+                            var applicationName = $"BetBlog-{hostingContext.HostingEnvironment.EnvironmentName}";
                             loggerConfiguration
-                            .ReadFrom.Configuration(hostingContext.Configuration)
-                            .Enrich.FromLogContext()
-                            .WriteTo.Console()
-                            .AddApplicationInsights(hostingContext.Configuration)
-                            .AddAzureLogAnalytics(hostingContext.Configuration);
-                        })
-                        .UseStartup<Startup>()
+                                    .ReadFrom.Configuration(hostingContext.Configuration)
+                                    .Enrich.FromLogContext()
+                                    .WriteTo.Console()
+                                    .AddApplicationInsights(hostingContext.Configuration)
+                                    .AddAzureLogAnalytics(hostingContext.Configuration, applicationName: applicationName);
+                        });
+
+                        webBuilder.UseStartup<Startup>()
                         .ConfigureKestrel(a => a.AddServerHeader = false);
                     });
         }
