@@ -1,15 +1,16 @@
 <Project>
   <PropertyGroup>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <NetCoreCommonVersion>3.1.0</NetCoreCommonVersion>
-    <BetCoreCommon>2.1.0 </BetCoreCommon>
+    <BetCoreCommon>2.1.0</BetCoreCommon>
   </PropertyGroup>
 
-  <ItemGroup Label="Microft.AspNetCore">
+  <!-- Issue with nuget restore https://github.com/microsoft/DockerTools/issues/209#issuecomment-555745408 -->
+  <ItemGroup Label="Microft.AspNetCore" Condition="'$(MSBuildProjectExtension)' != '.dcproj'">
     <PackageReference Update="Microsoft.AspNetCore.TestHost" Version="$(NetCoreCommonVersion)" />
   </ItemGroup>
 
-  <ItemGroup Label="Microsoft.EntityFrameworkCore">
+  <ItemGroup Label="Microsoft.EntityFrameworkCore" Condition="'$(MSBuildProjectExtension)' != '.dcproj'">
     <PackageReference Update="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="$(NetCoreCommonVersion)" />
     <PackageReference Update="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="$(NetCoreCommonVersion)" />
     <PackageReference Update="Microsoft.AspNetCore.Identity.UI" Version="$(NetCoreCommonVersion)" />
@@ -20,19 +21,21 @@
     <PackageReference Update="Microsoft.EntityFrameworkCore.Tools" Version="$(NetCoreCommonVersion)" />
   </ItemGroup>
 
- <ItemGroup Label="Others">
-    <PackageReference Update="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.5" />
+ <ItemGroup Label="Others" Condition="'$(MSBuildProjectExtension)' != '.dcproj'">
+    <PackageReference Update="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.10" />
     <PackageReference Update="Serilog.AspNetCore" Version="3.2.0" />
     <PackageReference Update="CronScheduler.AspNetCore" Version="2.0.0"/>
     <PackageReference Update="Polly" Version="7.0.2" />
     <PackageReference Update="Microsoft.Azure.KeyVault" Version="3.0.3" />
   </ItemGroup>
 
-  <ItemGroup Label="Bet Common libraries">
+  <ItemGroup Label="Bet Common libraries" Condition="'$(MSBuildProjectExtension)' != '.dcproj'">
     <PackageReference Update="Bet.AspNetCore" Version="$(BetCoreCommon)" />
     <PackageReference Update="Bet.AspNetCore.ReCapture" Version="$(BetCoreCommon)"/>
     <PackageReference Update="Bet.AspNetCore.HealthChecks" Version="$(BetCoreCommon)" />
     <PackageReference Update="Bet.AspNetCore.Logging" Version="$(BetCoreCommon)" />
+    <PackageReference Update="Bet.AspNetCore.AzureStorage" Version="$(BetCoreCommon)" />
+    <PackageReference Update="Bet.AspNetCore.Middleware" Version="$(BetCoreCommon)" />
     <PackageReference Update="Bet.Extensions" Version="$(BetCoreCommon)" />
     <PackageReference Update="Bet.Extensions.AzureVault" Version="$(BetCoreCommon)" />
     <PackageReference Update="Bet.Extensions.Logging" Version="$(BetCoreCommon)" />
@@ -40,14 +43,14 @@
     <PackageReference Update="Bet.CleanArchitecture.Core" Version="$(BetCoreCommon)"/>
   </ItemGroup>
 
-  <ItemGroup Label="UnitTests">
+  <ItemGroup Label="UnitTests" Condition="'$(MSBuildProjectExtension)' != '.dcproj'">
     <PackageReference Update="Microsoft.NET.Test.Sdk" Version="16.4.0" />
     <PackageReference Update="Moq" Version="4.13.1" />
     <PackageReference Update="xunit" Version="2.4.1" />
     <PackageReference Update="xunit.runner.visualstudio" Version="2.4.1" />
   </ItemGroup>
 
-  <ItemGroup Label="Analyzers">
+  <ItemGroup Label="Analyzers" Condition="'$(MSBuildProjectExtension)' != '.dcproj'">
     <PackageReference Include="Bet.CodeAnalyzers" Version="1.0.7" PrivateAssets="All" />
   </ItemGroup>
 

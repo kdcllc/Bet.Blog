@@ -6,12 +6,16 @@
     <ProjectGuid>aac57076-7e88-4074-b7d8-82dc9069d646</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
-    <DockerServiceName>DabarBlog</DockerServiceName>
+    <DockerServiceName>Bet.Blog.WebApp</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">
       <DependentUpon>docker-compose.yml</DependentUpon>
     </None>
+    <None Include="docker-compose.sqlserver.yml">
+      <DependentUpon>docker-compose.override.yml</DependentUpon>
+    </None>
+
     <None Include="docker-compose.yml" />
     <None Include=".dockerignore" />
   </ItemGroup>

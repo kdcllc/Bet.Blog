@@ -1,25 +1,29 @@
+# BUILD: docker-compose -f "docker-compose.yml" -f "docker-compose.override.yml"  up -d --build
+
 version: '3.4'
 
 services:
-  base:
-    image: betblogbase:v1
+
+  bet.blog.base:
+    image: kdcllc/betblog:base
     build:
       context: .
       dockerfile: Dockerfile.base
       args:
         SOLUTION_BASE: "true"
-        NUGET_RESTORE: "-v d"
+        NUGET_RESTORE: "-v=m"
         RUNTESTS: "false"
         VERBOSE: "false"
-  app:
+
+  bet.blog.webapp:
     image: kdcllc/betblog:v1
     build:
       context: .
-      dockerfile: src/App/Dockerfile
+      dockerfile: src/Bet.Blog.WebApp/Dockerfile
       args:
         RUNTESTS: "false"
         VERBOSE: "false"
-        PROJECT_PATH: "/src/App/App.csproj"
+        PROJECT_PATH: "/src/Bet.Blog.WebApp/Bet.Blog.WebApp.csproj"
         SOLUTION_BASE: "false"
     depends_on:
-      - base
+      - bet.blog.base

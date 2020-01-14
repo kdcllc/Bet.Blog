@@ -1,0 +1,31 @@
+{
+  // BUG https://github.com/microsoft/DockerTools/issues/204#issuecomment-522008361
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:56185/",
+      "sslPort": 44354
+    }
+  },
+  "profiles": {
+    "IISExpress": {
+      "commandName": "IISExpress"
+    },
+
+    "Bet.Blog.WebApp": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:6601;http://localhost:6600"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}"
+    }
+
+  }
+}

@@ -3,13 +3,16 @@
 version: '3.4'
 
 services:
-  app:
+  bet.blog.webapp:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - ASPNETCORE_HTTPS_PORT=6001
-      - ConnectionStrings:SqlServerConnection=Server=app.sqldb;Database=aspnetapp;User Id=sa;Password=Pass@word
-      - Serilog:WriteTo:Args:pathFormat=app/Logs/DabarBlog-log-{Date}.json
+      - EnableHttpsRedirection=true
+      
+      # in order for this key vault to work run appauthentication run --verbose:debug before opening the application in the visual studio code.
+      - MSI_ENDPOINT=${MSI_ENDPOINT}
+      - MSI_SECRET=${MSI_SECRET}
 
     ports:
       - "6000:80"
@@ -17,11 +20,3 @@ services:
     volumes:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-
-  app.sqldb:
-    image: microsoft/mssql-server-linux
-    ports:
-     - "5468:1433"
-    environment:
-     - SA_PASSWORD=Pass@word
-     - ACCEPT_EULA=Y
